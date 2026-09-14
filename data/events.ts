@@ -1,0 +1,206 @@
+export type ArcEvent = {
+  id: string;
+  title: string;
+  status: "upcoming" | "past";
+  dates: string;
+  place: string;
+  tag: string;
+  description: string;
+  organizer: string;
+  placeholder?: boolean;
+  image?: string;
+  link?: string;
+};
+
+const roundtableImage =
+  "https://alliance4regencomm.com/__l5e/assets-v1/0ba802f6-1c44-4590-820b-3d3ddc1b2851/arc-roundtables-flyer-sept.jpg";
+const roundtableLink = "https://RoadTo2028Beyond.com/";
+const roundtableDescription =
+  "ARC's monthly roundtable bringing members together to discuss environment, health, green tech, arts/culture, and peace. Contact GoldenRoadProduction@gmail.com or 530-362-8264 for details.";
+
+export const events: ArcEvent[] = [
+  {
+    id: "roundtable-venice-2026",
+    title: "Regenerative Roundtable — Venice",
+    status: "upcoming",
+    dates: "Sep 20, 2026",
+    place: "The Sanctuary, 2536 Lincoln Blvd, Venice, CA",
+    tag: "Roundtable",
+    description: roundtableDescription,
+    organizer: "Alliance for Regenerative Communities",
+    image: roundtableImage,
+    link: roundtableLink,
+  },
+  {
+    id: "roundtable-santa-monica-2026",
+    title: "Regenerative Roundtable — Santa Monica",
+    status: "upcoming",
+    dates: "Sep 25, 2026",
+    place: "The Beach House, 2219 Main St, Santa Monica, CA",
+    tag: "Roundtable",
+    description: roundtableDescription,
+    organizer: "Alliance for Regenerative Communities",
+    image: roundtableImage,
+    link: roundtableLink,
+  },
+  {
+    id: "roundtable-culver-city-2026",
+    title: "Regenerative Roundtable — Culver City",
+    status: "upcoming",
+    dates: "Sep 26, 2026",
+    place: "Jackson Street Cafe, 4065 Jackson Ave, Culver City, CA",
+    tag: "Roundtable",
+    description: roundtableDescription,
+    organizer: "Alliance for Regenerative Communities",
+    image: roundtableImage,
+    link: roundtableLink,
+  },
+  {
+    id: "roundtable-west-hills-2026",
+    title: "Regenerative Roundtable — West Hills",
+    status: "upcoming",
+    dates: "Sep 27, 2026",
+    place: "Tahdi's Home, West Hills, CA",
+    tag: "Roundtable",
+    description: roundtableDescription,
+    organizer: "Alliance for Regenerative Communities",
+    image: roundtableImage,
+    link: roundtableLink,
+  },
+  {
+    id: "forth-roadmap-2026",
+    title: "Forth Roadmap Conference",
+    status: "upcoming",
+    dates: "Sep 13, 2026",
+    place: "Seattle, WA",
+    tag: "Partner Event",
+    description: "The premier electric transportation conference in the United States.",
+    organizer: "Forth",
+  },
+  {
+    id: "green-california-summit-2026",
+    title: "Green California Summit",
+    status: "upcoming",
+    dates: "Sep 15 – 16, 2026",
+    place: "Pasadena Convention Center, Pasadena, CA",
+    tag: "Partner Event",
+    description:
+      "20th-anniversary summit celebrating sustainability, innovation, and collaboration in green technology.",
+    organizer: "Green Technology",
+    image:
+      "https://i0.wp.com/green-technology.org/wp-content/uploads/Green-California-Summit-Banner-02.jpg",
+  },
+  {
+    id: "sustainable-investment-forum-2026",
+    title: "Sustainable Investment Forum North America",
+    status: "upcoming",
+    dates: "Sep 22, 2026",
+    place: "New York City, NY",
+    tag: "Partner Event",
+    description: "A partnership event convened to accelerate international sustainable development.",
+    organizer: "Sustainable Investment Forum",
+  },
+  {
+    id: "la-business-council-summit-2026",
+    title: "20th Annual Los Angeles Business Council Sustainability Summit",
+    status: "upcoming",
+    dates: "Oct 1, 2026",
+    place: "Town and Gown, USC, Los Angeles, CA",
+    tag: "Partner Event",
+    description:
+      "A convening of business, government, and nonprofit leaders focused on clean energy and sustainability.",
+    organizer: "Los Angeles Business Council",
+  },
+  {
+    id: "gcn-investor-conference-2026",
+    title: "GCN Investor Conference",
+    status: "upcoming",
+    dates: "Oct 15, 2026",
+    place: "Renaissance Newport Beach Marriott, 4500 MacArthur Blvd, Newport Beach, CA",
+    tag: "Partner Event",
+    description: "An investment conference attracting 100+ investors.",
+    organizer: "GCN",
+    image:
+      "https://cdn.prod.website-files.com/681aee824048be0b674e62d2/6a43a21d9f09dc8bb0ffa9a3_c303cd9a7f2fd66d4a63ca228367d9c6_gcn-logo.png",
+  },
+  {
+    id: "sb26-san-diego-2026",
+    title: "SB'26 San Diego",
+    status: "upcoming",
+    dates: "Jun 8 – Oct 16, 2026",
+    place: "Town & Country Resort, San Diego, CA",
+    tag: "Partner Event",
+    description: "Brings together global business leaders to accelerate sustainable innovation.",
+    organizer: "Sustainable Brands",
+    image:
+      "https://events.sustainablebrands.com/conferences/sustainablebrands/wp-content/uploads/2026/06/sb26-hero-post-event-1500x750-1-1024x512.jpg",
+  },
+  {
+    id: "greenbuild-2026",
+    title: "Greenbuild International Conference and Expo",
+    status: "upcoming",
+    dates: "Oct 20, 2026",
+    place: "Javits Center, New York, NY",
+    tag: "Partner Event",
+    description: "The largest annual event for green building professionals.",
+    organizer: "Greenbuild",
+    image:
+      "https://knect365.imgix.net/uploads/Greenbuild-2021-1x1-1080x1080-b6dd47e8fbcf07a91dfae533133d2643.jpg?auto=format&fit=max&w=400",
+  },
+  {
+    id: "european-sustainability-congress-2026",
+    title: "European Sustainability Congress",
+    status: "upcoming",
+    dates: "Oct 29, 2026",
+    place: "Mała Warszawa, Otwocka 14, Warsaw, Poland",
+    tag: "Partner Event",
+    description: "One of the biggest international events about the circular economy.",
+    organizer: "Circular Week",
+  },
+  {
+    id: "cop31-antalya-2026",
+    title: "COP31",
+    status: "upcoming",
+    dates: "Nov 9, 2026",
+    place: "Antalya, Türkiye",
+    tag: "Partner Event",
+    description: "The UN climate conference, with accommodation secured at the Royal Seginus Hotel.",
+    organizer: "World Climate Foundation",
+    image:
+      "https://static.wixstatic.com/media/358f84_fb4a2ba4a07b4d1b8cde0218b1bf43f6~mv2.jpg/v1/fill/w_1092,h_713,al_c/358f84_fb4a2ba4a07b4d1b8cde0218b1bf43f6~mv2.jpg",
+  },
+  {
+    id: "greenbiz-2027",
+    title: "GreenBiz",
+    status: "upcoming",
+    dates: "Feb 23 – 25, 2027",
+    place: "Gaylord Pacific, San Diego, CA",
+    tag: "Partner Event",
+    description: "A top sustainability-in-business conference uniting industry leaders.",
+    organizer: "GreenBiz / Trellis",
+    image:
+      "https://trellis.net/wp-content/uploads/2026/05/greenbiz27_website_feature_image_1200x630-2.png",
+  },
+  {
+    id: "santa-monica-2026",
+    title: "Coastal Futures Convening",
+    status: "past",
+    dates: "Jul 11 – 12, 2026",
+    place: "Santa Monica & Venice, CA",
+    tag: "Workshop",
+    description:
+      "A two-day convening exploring regenerative approaches to coastal and urban ecosystems, bringing together practitioners from across the ARC network.",
+    organizer: "Alliance for Regenerative Communities",
+  },
+  {
+    id: "ojai-2026",
+    title: "A Global Call to Regenerate",
+    status: "past",
+    dates: "May 29 – 31, 2026",
+    place: "Sane Living Center, Ojai, CA",
+    tag: "Gathering",
+    description:
+      "A gathering of members and allied organizations focused on collaborative, place-based regenerative projects.",
+    organizer: "Alliance for Regenerative Communities",
+  },
+];

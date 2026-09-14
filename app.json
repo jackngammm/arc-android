@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "ARC",
+    "slug": "arc-app",
+    "scheme": "arcapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "org.allianceforregenerativecommunities.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#16241B"
+        }
+      ],
+      "expo-status-bar"
+    ]
+  }
+}
