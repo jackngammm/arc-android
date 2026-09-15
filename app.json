@@ -25,10 +25,13 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      [
+            [
         "expo-splash-screen",
         {
-          "backgroundColor": "#16241B"
+          "backgroundColor": "#16241B",
+          "image": "./assets/icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain"
         }
       ],
       "expo-status-bar"
