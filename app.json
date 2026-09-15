@@ -14,6 +14,14 @@
       "supportsTablet": false,
       "bundleIdentifier": "org.allianceforregenerativecommunities.app"
     },
+    "android": {
+      "package": "org.allianceforregenerativecommunities.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#16241B"
+      }
+    },
     "plugins": [
       "expo-router",
       "expo-font",
