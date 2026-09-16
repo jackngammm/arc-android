@@ -1,11 +1,17 @@
-import { ScrollView, View, Text, Image, Linking, StyleSheet } from "react-native";
+import { ScrollView, View, Text, Image, Linking, Share, StyleSheet } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { CalendarDays, MapPin, User, ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react-native";
 import { colors, fonts } from "@/constants/theme";
 import { Chip } from "@/components/Chip";
 import { PrimaryButton, GhostButton } from "@/components/Buttons";
 import { useApp } from "@/context/AppContext";
-import { events } from "@/data/events";
+import { events, type ArcEvent } from "@/data/events";
+
+function buildShareMessage(event: ArcEvent): string {
+  const lines = [event.title, event.dates, event.place];
+  if (event.link) lines.push(event.link);
+  return lines.join("\n");
+}
 
 export default function EventDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -22,6 +28,14 @@ export default function EventDetailScreen() {
   }
 
   const saved = savedEventIds.includes(event.id);
+
+  const handleShare = async () => {
+    try {
+      await Share.share({ message: buildShareMessage(event) });
+    } catch (err) {
+      console.warn("Share failed", err);
+    }
+  };
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 32 }}>
@@ -70,7 +84,7 @@ export default function EventDetailScreen() {
           onPress={() => Linking.openURL(event.link!)}
         />
       )}
-      <GhostButton label="Share event" style={{ width: "100%", marginTop: 10 }} />
+      <GhostButton label="Share event" style={{ width: "100%", marginTop: 10 }} onPress={handleShare} />
     </ScrollView>
   );
 }
