@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, Linking } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Linking, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react-native";
 import { colors, fonts } from "@/constants/theme";
@@ -28,9 +28,9 @@ export default function ResourceDetailScreen() {
     <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 32 }}>
       <View style={styles.topRow}>
         <ArrowLeft size={18} color={colors.paper} onPress={() => router.back()} />
-        <View onTouchEnd={() => toggleSavedResource(resource.id)}>
+        <TouchableOpacity onPress={() => toggleSavedResource(resource.id)} hitSlop={8}>
           {saved ? <BookmarkCheck size={18} color={colors.gold} /> : <Bookmark size={18} color={colors.textMuted} />}
-        </View>
+        </TouchableOpacity>
       </View>
 
       {resource.placeholder && (

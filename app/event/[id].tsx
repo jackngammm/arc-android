@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Image, Linking, Share, StyleSheet } from "react-native";
+import { ScrollView, View, Text, Image, Linking, Share, TouchableOpacity, StyleSheet } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { CalendarDays, MapPin, User, ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react-native";
 import { colors, fonts } from "@/constants/theme";
@@ -41,9 +41,9 @@ export default function EventDetailScreen() {
     <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 32 }}>
       <View style={styles.topRow}>
         <ArrowLeft size={18} color={colors.paper} onPress={() => router.back()} />
-        <View onTouchEnd={() => toggleSavedEvent(event.id)}>
+        <TouchableOpacity onPress={() => toggleSavedEvent(event.id)} hitSlop={8}>
           {saved ? <BookmarkCheck size={18} color={colors.gold} /> : <Bookmark size={18} color={colors.textMuted} />}
-        </View>
+        </TouchableOpacity>
       </View>
 
       {event.image && <Image source={{ uri: event.image }} style={styles.banner} />}
