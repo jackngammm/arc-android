@@ -13,6 +13,7 @@ export default function MembershipScreen() {
     <Text style={styles.h1}>Join the regenerative movement</Text>
     <Text style={styles.body}>ARC membership options, applications, pricing, and payment paths are managed on the official ARC website.</Text>
     <PrimaryButton label="Open ARC membership" onPress={() => Linking.openURL(ARC_MEMBERSHIP_URL)} />
+    <SecondaryButton label="Already have a verification code?" onPress={() => router.push("/verify-membership")} style={{ marginTop: 10 }} />
     <SecondaryButton label="Continue browsing" onPress={() => router.back()} style={{ marginTop: 10 }} />
     <Text style={styles.url}>{ARC_MEMBERSHIP_URL}</Text>
   </View>;
