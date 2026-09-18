@@ -70,7 +70,7 @@ export const events: ArcEvent[] = [
   {
     id: "forth-roadmap-2026",
     title: "Forth Roadmap Conference",
-    status: "upcoming",
+    status: "past",
     dates: "Sep 13, 2026",
     place: "Seattle, WA",
     tag: "Partner Event",
@@ -80,7 +80,7 @@ export const events: ArcEvent[] = [
   {
     id: "green-california-summit-2026",
     title: "Green California Summit",
-    status: "upcoming",
+    status: "past",
     dates: "Sep 15 – 16, 2026",
     place: "Pasadena Convention Center, Pasadena, CA",
     tag: "Partner Event",
@@ -113,24 +113,26 @@ export const events: ArcEvent[] = [
   },
   {
     id: "gcn-investor-conference-2026",
-    title: "GCN Investor Conference",
+    title: "GCN Oct 15 Investor Conference @ Newport Beach, CA - 100+ investors!",
     status: "upcoming",
     dates: "Oct 15, 2026",
     place: "Renaissance Newport Beach Marriott, 4500 MacArthur Blvd, Newport Beach, CA",
     tag: "Partner Event",
-    description: "An investment conference attracting 100+ investors.",
+    description:
+      "Providing investors around the world with deal flow based on their preferences and raising capital for entrepreneurs & startups globally 24/7",
     organizer: "GCN",
     image:
       "https://cdn.prod.website-files.com/681aee824048be0b674e62d2/6a43a21d9f09dc8bb0ffa9a3_c303cd9a7f2fd66d4a63ca228367d9c6_gcn-logo.png",
   },
   {
     id: "sb26-san-diego-2026",
-    title: "SB'26 San Diego",
+    title: "Event Highlights | SB'26 San Diego",
     status: "upcoming",
     dates: "Jun 8 – Oct 16, 2026",
     place: "Town & Country Resort, San Diego, CA",
     tag: "Partner Event",
-    description: "Brings together global business leaders to accelerate sustainable innovation.",
+    description:
+      "SB'26 San Diego brings together global business leaders to accelerate sustainable innovation, growth and market transformation. Register now.",
     organizer: "Sustainable Brands",
     image:
       "https://events.sustainablebrands.com/conferences/sustainablebrands/wp-content/uploads/2026/06/sb26-hero-post-event-1500x750-1-1024x512.jpg",
