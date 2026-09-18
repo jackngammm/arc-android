@@ -2,61 +2,53 @@ export type Initiative = {
   id: string;
   title: string;
   summary: string;
-  access: "public" | "member";
-  placeholder?: boolean;
+  category: string;
+  featured?: boolean;
+  inviteOnly?: boolean;
+  volunteerOpportunityCount?: number;
+  image?: string;
 };
 
-export type VolunteerTask = {
-  id: string;
-  title: string;
-  summary: string;
-  timeCommitment: string;
-};
-
-// Public initiatives are visible to everyone (guest, free, paid).
-// Member-only initiatives are locked behind a paid/scholarship/team membership.
 export const initiatives: Initiative[] = [
   {
-    id: "init-1",
-    title: "Bio-region mapping project",
-    summary: "A collaborative effort to map regenerative activity across member bio-regions.",
-    access: "public",
-    placeholder: true,
+    id: "active-capture-remediation-systems",
+    title: "Active Capture Remediation Systems",
+    summary:
+      "An initiative for implementing and managing active capture remediation systems, possibly for environmental cleanup.",
+    category: "sustainability",
+    featured: true,
+    inviteOnly: true,
   },
   {
-    id: "init-2",
-    title: "Annual collective project vote",
-    summary: "Members vote each year on the initiative ARC puts its collective skills behind.",
-    access: "public",
-    placeholder: true,
+    id: "regen-health-alliance",
+    title: "Regen Health Alliance",
+    summary:
+      "Emergency Response Network implementing trauma and health support for individuals and organizations",
+    category: "health",
+    featured: true,
   },
   {
-    id: "init-3",
-    title: "Member co-referral pipeline",
-    summary: "A private space for paid members to co-refer clients and collaborate on projects.",
-    access: "member",
-    placeholder: true,
+    id: "build-back-green-la",
+    title: "Build Back Green LA",
+    summary:
+      "Rebuilding Los Angeles fire damaged community with sustainable, regenerative practices and green jobs.",
+    category: "sustainability",
+    featured: true,
   },
   {
-    id: "init-4",
-    title: "AI project agents workspace",
-    summary: "Access to ARC's AI-powered project agents for regenerative initiative planning.",
-    access: "member",
-    placeholder: true,
-  },
-];
-
-export const volunteerTasks: VolunteerTask[] = [
-  {
-    id: "task-1",
-    title: "Help proofread the resources directory",
-    summary: "Review a handful of directory listings for accuracy and clarity.",
-    timeCommitment: "~1 hour",
+    id: "grow-the-congo-green",
+    title: "Grow The Congo Green",
+    summary: "Reforestation and sustainable agriculture restoring lands in the Congo.",
+    category: "agriculture",
+    featured: true,
   },
   {
-    id: "task-2",
-    title: "Share an upcoming event on social media",
-    summary: "Post about an upcoming ARC event with your network.",
-    timeCommitment: "~15 minutes",
+    id: "regen-hub-santa-monica-venice",
+    title: "Regen Hub - Santa Monica/Venice",
+    summary:
+      "Create a community hub for sustainability, health services, education, and resilience in Santa Monica/Venice.",
+    category: "community",
+    featured: true,
+    volunteerOpportunityCount: 5,
   },
 ];

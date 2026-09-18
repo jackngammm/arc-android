@@ -1,47 +1,63 @@
-import { ScrollView, View, Text, StyleSheet } from "react-native";
+import { useMemo, useState } from "react";
+import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
+import { Search } from "lucide-react-native";
 import { colors, fonts, radius } from "@/constants/theme";
 import { InitiativeCard } from "@/components/InitiativeCard";
-import { initiatives, volunteerTasks } from "@/data/initiatives";
+import { initiatives } from "@/data/initiatives";
 import { useApp } from "@/context/AppContext";
 
 export default function InitiativesScreen() {
-  const { userType } = useApp();
-  const publicInitiatives = initiatives.filter((i) => i.access === "public");
-  const memberInitiatives = initiatives.filter((i) => i.access === "member");
-  const canVolunteer = userType !== "guest";
+  const { isSignedIn } = useApp();
+  const [query, setQuery] = useState("");
+
+  const visibleInitiatives = useMemo(() => {
+    const base = isSignedIn ? initiatives : initiatives.filter((i) => i.featured === true);
+    const q = query.trim().toLowerCase();
+    if (!q) return base;
+    // Local substring match only — not a reproduction of the website's real search.
+    return base.filter(
+      (i) =>
+        i.title.toLowerCase().includes(q) ||
+        i.category.toLowerCase().includes(q) ||
+        i.summary.toLowerCase().includes(q)
+    );
+  }, [isSignedIn, query]);
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 24 }}>
-      <Text style={styles.eyebrow}>Collective action</Text>
-      <Text style={styles.h1}>Initiatives</Text>
+      <Text style={styles.eyebrow}>Community Initiatives</Text>
+      <Text style={styles.h1}>Join the Regenerative Movement</Text>
+      <Text style={styles.description}>
+        Discover initiatives driving real change, volunteer your skills, or start your own project.
+      </Text>
 
-      <Text style={styles.h2}>Public initiatives</Text>
-      <View style={{ gap: 12, marginTop: 10, marginBottom: 22 }}>
-        {publicInitiatives.map((i) => (
-          <InitiativeCard key={i.id} initiative={i} />
-        ))}
+      <View style={styles.searchBar}>
+        <Search size={15} color={colors.textMuted} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search initiatives..."
+          placeholderTextColor={colors.textMuted}
+          value={query}
+          onChangeText={setQuery}
+        />
       </View>
 
-      <Text style={styles.h2}>Open volunteer tasks</Text>
-      {!canVolunteer && (
-        <Text style={styles.note}>Create a free account to take on a volunteer task.</Text>
+      {!isSignedIn && (
+        <Text style={styles.note}>
+          You're currently viewing featured initiatives only. Sign up or log in to access all public
+          community initiatives.
+        </Text>
       )}
-      <View style={{ gap: 10, marginTop: 10, marginBottom: 22 }}>
-        {volunteerTasks.map((t) => (
-          <View key={t.id} style={styles.taskCard}>
-            <Text style={styles.taskTitle}>{t.title}</Text>
-            <Text style={styles.taskSummary}>{t.summary}</Text>
-            <Text style={styles.taskTime}>{t.timeCommitment}</Text>
-          </View>
-        ))}
-      </View>
 
-      <Text style={styles.h2}>Member-only initiatives</Text>
-      <View style={{ gap: 12, marginTop: 10 }}>
-        {memberInitiatives.map((i) => (
-          <InitiativeCard key={i.id} initiative={i} />
-        ))}
-      </View>
+      {visibleInitiatives.length === 0 ? (
+        <Text style={styles.emptyText}>No initiatives match your search.</Text>
+      ) : (
+        <View style={{ gap: 12 }}>
+          {visibleInitiatives.map((i) => (
+            <InitiativeCard key={i.id} initiative={i} />
+          ))}
+        </View>
+      )}
     </ScrollView>
   );
 }
@@ -56,17 +72,26 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     marginBottom: 6,
   },
-  h1: { fontFamily: fonts.display, fontSize: 24, color: colors.paper, marginBottom: 20 },
-  h2: { fontFamily: fonts.display, fontSize: 16, color: colors.paper },
-  note: { fontFamily: fonts.body, fontSize: 12, color: colors.textMuted, marginTop: 6 },
-  taskCard: {
+  h1: { fontFamily: fonts.display, fontSize: 24, color: colors.paper, marginBottom: 10 },
+  description: { fontFamily: fonts.body, fontSize: 13.5, lineHeight: 20, color: colors.textMuted, marginBottom: 18 },
+  searchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.surfaceLight,
-    borderRadius: radius.md,
-    padding: 14,
+    borderRadius: radius.sm,
+    paddingHorizontal: 12,
+    marginBottom: 14,
   },
-  taskTitle: { fontFamily: fonts.bodySemibold, fontSize: 13, color: colors.paper, marginBottom: 4 },
-  taskSummary: { fontFamily: fonts.body, fontSize: 12, color: colors.textMuted, lineHeight: 17, marginBottom: 6 },
-  taskTime: { fontFamily: fonts.mono, fontSize: 10.5, color: colors.sage },
+  searchInput: {
+    flex: 1,
+    fontFamily: fonts.body,
+    fontSize: 13.5,
+    color: colors.paper,
+    paddingVertical: 11,
+  },
+  note: { fontFamily: fonts.body, fontSize: 12, color: colors.textMuted, marginBottom: 16 },
+  emptyText: { fontFamily: fonts.body, fontSize: 13, color: colors.textMuted },
 });
