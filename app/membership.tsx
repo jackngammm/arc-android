@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Linking } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import { colors, fonts } from "@/constants/theme";
@@ -12,7 +12,7 @@ export default function MembershipScreen() {
     <Text style={styles.eyebrow}>Membership</Text>
     <Text style={styles.h1}>Join the regenerative movement</Text>
     <Text style={styles.body}>ARC membership options, applications, pricing, and payment paths are managed on the official ARC website.</Text>
-    <PrimaryButton label="Open ARC membership" onPress={() => Linking.openURL(ARC_MEMBERSHIP_URL)} />
+    <PrimaryButton label="Open ARC membership" onPress={() => router.push({ pathname: "/platform", params: { entry: "membership" } })} />
     <SecondaryButton label="Already have a verification code?" onPress={() => router.push("/verify-membership")} style={{ marginTop: 10 }} />
     <SecondaryButton label="Continue browsing" onPress={() => router.back()} style={{ marginTop: 10 }} />
     <Text style={styles.url}>{ARC_MEMBERSHIP_URL}</Text>

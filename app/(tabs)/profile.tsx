@@ -33,7 +33,7 @@ export default function ProfileScreen() {
         <Text style={styles.body}>
           Sign in to track your membership status, saved events and resources, and referrals.
         </Text>
-        <PrimaryButton label="Sign in" icon="none" onPress={() => router.push("/sign-in")} />
+        <PrimaryButton label="Sign in" icon="none" onPress={() => router.push("/platform")} />
         <SecondaryButton label="Become a member" style={{ marginTop: 10 }} onPress={() => router.push("/membership")} />
       </ScrollView>
     );
