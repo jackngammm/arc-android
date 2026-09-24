@@ -29,7 +29,7 @@ export default function ProfileScreen() {
     return (
       <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 24 }}>
         <Text style={styles.eyebrow}>Account</Text>
-        <Text style={styles.h1}>You're browsing as a guest</Text>
+        <Text style={styles.h1}>Sign in or manage your ARC account</Text>
         <Text style={styles.body}>
           Sign in to track your membership status, saved events and resources, and referrals.
         </Text>

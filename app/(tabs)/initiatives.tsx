@@ -1,12 +1,14 @@
 import { useMemo, useState } from "react";
 import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
 import { Search } from "lucide-react-native";
+import { useRouter } from "expo-router";
 import { colors, fonts, radius } from "@/constants/theme";
 import { InitiativeCard } from "@/components/InitiativeCard";
 import { initiatives } from "@/data/initiatives";
 import { useApp } from "@/context/AppContext";
 
 export default function InitiativesScreen() {
+  const router = useRouter();
   const { isSignedIn } = useApp();
   const [query, setQuery] = useState("");
 
@@ -43,9 +45,9 @@ export default function InitiativesScreen() {
       </View>
 
       {!isSignedIn && (
-        <Text style={styles.note}>
-          You're currently viewing featured initiatives only. Sign up or log in to access all public
-          community initiatives.
+        <Text style={styles.note} onPress={() => router.push("/platform")}>
+          Only featured initiatives are shown here. Visit the ARC platform for full access to
+          public community initiatives.
         </Text>
       )}
 
