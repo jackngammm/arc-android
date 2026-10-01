@@ -2,11 +2,13 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { colors, fonts } from "@/constants/theme";
 import { Chip } from "@/components/Chip";
+import { ArcLogo } from "@/components/ArcLogo";
+import { ArcFooter } from "@/components/ArcFooter";
 import { PrimaryButton } from "@/components/Buttons";
 import { GrowthRings } from "@/components/GrowthRings";
 import { EventCard } from "@/components/EventCard";
 import { EcosystemLinkCard } from "@/components/EcosystemLinkCard";
-import { events } from "@/data/events";
+import { events, getEventStatus } from "@/data/events";
 import { ecosystemLinks } from "@/data/ecosystem";
 import { identityPillars } from "@/data/siteContent";
 import { useApp } from "@/context/AppContext";
@@ -14,7 +16,7 @@ import { useApp } from "@/context/AppContext";
 export default function HomeScreen() {
   const router = useRouter();
   const { userType } = useApp();
-  const upcoming = events.filter((e) => e.status === "upcoming");
+  const upcoming = events.filter((e) => getEventStatus(e) === "upcoming");
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: 32 }}>
@@ -23,7 +25,10 @@ export default function HomeScreen() {
           <GrowthRings />
         </View>
         <Chip>Regenerative network</Chip>
-        <Text style={styles.h1}>Join the regenerative movement</Text>
+        <View style={styles.headingRow}>
+          <Text style={styles.h1}>Join the regenerative movement</Text>
+          <ArcLogo />
+        </View>
         <Text style={styles.heroBody}>
           A non-hierarchical, internationally committed group of individuals, organizations, and
           businesses dedicated to sustainable practices, health, and regenerative solutions.
@@ -66,6 +71,15 @@ export default function HomeScreen() {
         <PrimaryButton label="Contact ARC" icon="none" style={{ marginTop: 10 }} onPress={() => router.push("/contact")} />
       </View>
 
+      <View style={[styles.section, { paddingTop: 4 }]}>
+        <Text style={styles.h2}>Ecosystem</Text>
+        <View style={{ gap: 10, marginTop: 12 }}>
+          {ecosystemLinks.map((link) => (
+            <EcosystemLinkCard key={link.id} link={link} />
+          ))}
+        </View>
+      </View>
+
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.h2}>Upcoming events</Text>
@@ -84,14 +98,7 @@ export default function HomeScreen() {
         )}
       </View>
 
-      <View style={[styles.section, { paddingTop: 4 }]}>
-        <Text style={styles.h2}>Ecosystem</Text>
-        <View style={{ gap: 10, marginTop: 12 }}>
-          {ecosystemLinks.map((link) => (
-            <EcosystemLinkCard key={link.id} link={link} />
-          ))}
-        </View>
-      </View>
+      <ArcFooter />
     </ScrollView>
   );
 }
@@ -100,13 +107,13 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.bgDeep },
   hero: { padding: 20, paddingTop: 24, backgroundColor: colors.surface, overflow: "hidden" },
   ringsWrap: { position: "absolute", top: -40, right: -50 },
+  headingRow: { flexDirection: "row", alignItems: "center", gap: 14, marginTop: 14, marginBottom: 10, maxWidth: 420 },
   h1: {
+    flex: 1,
     fontFamily: fonts.display,
     fontSize: 30,
     lineHeight: 36,
     color: colors.paper,
-    marginTop: 14,
-    marginBottom: 10,
     maxWidth: 290,
   },
   heroBody: {

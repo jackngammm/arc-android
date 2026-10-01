@@ -4,12 +4,15 @@ import { CalendarDays, MapPin, Bookmark, BookmarkCheck } from "lucide-react-nati
 import { colors, fonts, radius } from "@/constants/theme";
 import { Chip } from "@/components/Chip";
 import { useApp } from "@/context/AppContext";
-import type { ArcEvent } from "@/data/events";
+import { isPartnerEventLocked, type ArcEvent } from "@/data/events";
+import { LockedPartnerEvent } from "@/components/LockedPartnerEvent";
 
 export function EventCard({ event }: { event: ArcEvent }) {
   const router = useRouter();
   const { savedEventIds, toggleSavedEvent } = useApp();
   const saved = savedEventIds.includes(event.id);
+
+  if (isPartnerEventLocked(event)) return <LockedPartnerEvent title={event.title} />;
 
   return (
     <TouchableOpacity

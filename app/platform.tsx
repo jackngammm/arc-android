@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, BackHandler, Linking, StyleSheet, Text, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ArrowLeft } from "lucide-react-native";
+import { ArrowLeft, X } from "lucide-react-native";
 import WebView from "react-native-webview";
 import type {
   ShouldStartLoadRequest,
@@ -71,6 +71,16 @@ export default function PlatformScreen() {
     return false;
   }, [canGoBack, router]);
 
+  // Native-only exit — deliberately never touches the WebView, regardless of its
+  // navigation history. Lets a user several pages deep in the site leave in one tap.
+  const exitPlatform = useCallback(() => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/(tabs)");
+    }
+  }, [router]);
+
   useEffect(() => {
     const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
       if (canGoBack && webviewRef.current) {
@@ -127,7 +137,14 @@ export default function PlatformScreen() {
       <View style={styles.header}>
         <ArrowLeft size={18} color={colors.paper} onPress={goBackOrExit} />
         <Text style={styles.headerTitle}>ARC Platform</Text>
-        <View style={{ width: 18 }} />
+        <X
+          size={18}
+          color={colors.paper}
+          onPress={exitPlatform}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Close ARC Platform"
+        />
       </View>
 
       <View style={styles.body}>

@@ -3,14 +3,14 @@ import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet } from 
 import { Search } from "lucide-react-native";
 import { colors, fonts, radius } from "@/constants/theme";
 import { EventCard } from "@/components/EventCard";
-import { events } from "@/data/events";
+import { events, getEventStatus } from "@/data/events";
 
 export default function EventsScreen() {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
-    const base = events.filter((e) => e.status === tab);
+    const base = events.filter((e) => getEventStatus(e) === tab);
     const q = query.trim().toLowerCase();
     if (!q) return base;
     return base.filter(

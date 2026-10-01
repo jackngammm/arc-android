@@ -5,7 +5,8 @@ import { colors, fonts } from "@/constants/theme";
 import { Chip } from "@/components/Chip";
 import { PrimaryButton, GhostButton } from "@/components/Buttons";
 import { useApp } from "@/context/AppContext";
-import { events, type ArcEvent } from "@/data/events";
+import { events, getEventStatus, isPartnerEventLocked, type ArcEvent } from "@/data/events";
+import { LockedPartnerEvent } from "@/components/LockedPartnerEvent";
 
 function buildShareMessage(event: ArcEvent): string {
   const lines = [event.title, event.dates, event.place];
@@ -24,6 +25,15 @@ export default function EventDetailScreen() {
       <View style={styles.screen}>
         <Text style={styles.notFound}>Event not found.</Text>
       </View>
+    );
+  }
+
+  if (isPartnerEventLocked(event)) {
+    return (
+      <ScrollView style={styles.screen} contentContainerStyle={{ padding: 20, paddingBottom: 32 }}>
+        <GhostButton label="Back to events" onPress={() => router.replace("/(tabs)/events")} style={{ marginBottom: 18 }} />
+        <LockedPartnerEvent title={event.title} />
+      </ScrollView>
     );
   }
 
@@ -76,7 +86,7 @@ export default function EventDetailScreen() {
 
       <Text style={styles.description}>{event.description}</Text>
 
-      {event.status === "upcoming" && event.link && (
+      {getEventStatus(event) === "upcoming" && event.link && (
         <PrimaryButton
           label="View Details"
           icon="none"

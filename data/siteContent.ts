@@ -18,15 +18,36 @@ export const identityPillars = [
 ];
 
 export const productHubItems = [
-  { title: "Initiative agents", description: "AI-powered project agents to help turn regenerative ideas into coordinated action." },
-  { title: "Referral marketplace", description: "Connect trusted ARC members with clients, collaborators, and opportunities." },
-  { title: "Community discussions", description: "A space for members to share knowledge, ask questions, and work together." },
-  { title: "Capital portal", description: "A future-facing pathway for projects, investors, and regenerative finance." },
-  { title: "Organization dashboard", description: "Tools for teams bringing multiple people into the ARC network." },
+  { title: "Discover member-made goods", description: "Browse products from across the alliance, with photos, prices, availability, and shipping origins on the ARC website." },
+  { title: "Find the right product", description: "Search by name or description and filter by category, shipping origin, price, and stock. Sort by newest, featured, or price." },
+  { title: "Sell on Product Hub", description: "Sign in on the ARC website to access your products and manage your listings." },
 ];
 
 export const bioRegions = [
   { title: "Place-based action", description: "Connect regenerative work to the ecosystems, communities, and watersheds where it happens." },
   { title: "Local knowledge", description: "Share practical knowledge and relationships across local and global bioregional networks." },
   { title: "Network mapping", description: "Discover people, organizations, and initiatives working toward a regenerative future." },
+];
+
+export const founders = [
+  {
+    id: "michael-dimartino",
+    name: "Michael DiMartino",
+    role: "Founder & Executive Director",
+    bio: "Michael brings together regenerative real estate, land development, environmental stewardship, and community building to help create places where people and planet can thrive.",
+    skills: ["Regenerative development", "Community building", "Sustainable design", "Real estate innovation", "EarthStock"],
+  },
+  {
+    id: "carlos-lotfipour",
+    name: "Carlos \"Aari\" Lotfipour",
+    role: "Co-Founder & Technology Director",
+    bio: "Carlos combines software engineering, music production, immersive media, and digital platforms to build technology that supports regenerative collaboration.",
+    skills: ["Software engineering", "Full-stack development", "Audio engineering", "Virtual production", "Immersive media"],
+  },
+];
+
+export const teamMembers = [
+  { name: "Michael DiMartino", role: "Founder & Executive Director" },
+  { name: "Carlos \"Aari\" Lotfipour", role: "Co-Founder & Technology Director" },
+  { name: "ARC community", role: "Practitioners, partners, and volunteers across the network" },
 ];

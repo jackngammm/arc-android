@@ -1,8 +1,13 @@
 export type ArcEvent = {
   id: string;
   title: string;
+  // Manually maintained fallback, used only when startDate/endDate aren't set (see getEventStatus below).
   status: "upcoming" | "past";
   dates: string;
+  // Structured dates for automatic status derivation, in local calendar "YYYY-MM-DD" — kept
+  // separate from `dates`, which remains the untouched human-readable display string.
+  startDate?: string;
+  endDate?: string;
   place: string;
   tag: string;
   description: string;
@@ -11,6 +16,25 @@ export type ArcEvent = {
   image?: string;
   link?: string;
 };
+
+// Temporary presentation gate until website-backed member access is available.
+export const isPartnerEventLocked = (event: ArcEvent) => event.tag === "Partner Event";
+
+function formatLocalISODate(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+// Derives Upcoming/Past from structured dates using local-calendar-day comparison (never UTC
+// Date arithmetic, which can flip status a day early/late depending on timezone). An event stays
+// Upcoming through the entirety of its local endDate and becomes Past on the next local day.
+// Falls back to the manually stored `status` field for any event without structured dates.
+export function getEventStatus(event: Pick<ArcEvent, "endDate" | "status">, now: Date = new Date()): "upcoming" | "past" {
+  if (!event.endDate) return event.status;
+  return event.endDate < formatLocalISODate(now) ? "past" : "upcoming";
+}
 
 const roundtableImage =
   "https://alliance4regencomm.com/__l5e/assets-v1/0ba802f6-1c44-4590-820b-3d3ddc1b2851/arc-roundtables-flyer-sept.jpg";
@@ -24,6 +48,8 @@ export const events: ArcEvent[] = [
     title: "Regenerative Roundtable — Venice",
     status: "upcoming",
     dates: "Sep 20, 2026",
+    startDate: "2026-09-20",
+    endDate: "2026-09-20",
     place: "The Sanctuary, 2536 Lincoln Blvd, Venice, CA",
     tag: "Roundtable",
     description: roundtableDescription,
@@ -36,6 +62,8 @@ export const events: ArcEvent[] = [
     title: "Regenerative Roundtable — Santa Monica",
     status: "upcoming",
     dates: "Sep 25, 2026",
+    startDate: "2026-09-25",
+    endDate: "2026-09-25",
     place: "The Beach House, 2219 Main St, Santa Monica, CA",
     tag: "Roundtable",
     description: roundtableDescription,
@@ -48,6 +76,8 @@ export const events: ArcEvent[] = [
     title: "Regenerative Roundtable — Culver City",
     status: "upcoming",
     dates: "Sep 26, 2026",
+    startDate: "2026-09-26",
+    endDate: "2026-09-26",
     place: "Jackson Street Cafe, 4065 Jackson Ave, Culver City, CA",
     tag: "Roundtable",
     description: roundtableDescription,
@@ -60,6 +90,8 @@ export const events: ArcEvent[] = [
     title: "Regenerative Roundtable — West Hills",
     status: "upcoming",
     dates: "Sep 27, 2026",
+    startDate: "2026-09-27",
+    endDate: "2026-09-27",
     place: "Tahdi's Home, West Hills, CA",
     tag: "Roundtable",
     description: roundtableDescription,
@@ -72,6 +104,8 @@ export const events: ArcEvent[] = [
     title: "Forth Roadmap Conference",
     status: "past",
     dates: "Sep 13, 2026",
+    startDate: "2026-09-13",
+    endDate: "2026-09-13",
     place: "Seattle, WA",
     tag: "Partner Event",
     description: "The premier electric transportation conference in the United States.",
@@ -82,6 +116,8 @@ export const events: ArcEvent[] = [
     title: "Green California Summit",
     status: "past",
     dates: "Sep 15 – 16, 2026",
+    startDate: "2026-09-15",
+    endDate: "2026-09-16",
     place: "Pasadena Convention Center, Pasadena, CA",
     tag: "Partner Event",
     description:
@@ -95,6 +131,8 @@ export const events: ArcEvent[] = [
     title: "Sustainable Investment Forum North America",
     status: "upcoming",
     dates: "Sep 22, 2026",
+    startDate: "2026-09-22",
+    endDate: "2026-09-22",
     place: "New York City, NY",
     tag: "Partner Event",
     description: "A partnership event convened to accelerate international sustainable development.",
@@ -105,6 +143,8 @@ export const events: ArcEvent[] = [
     title: "20th Annual Los Angeles Business Council Sustainability Summit",
     status: "upcoming",
     dates: "Oct 1, 2026",
+    startDate: "2026-10-01",
+    endDate: "2026-10-01",
     place: "Town and Gown, USC, Los Angeles, CA",
     tag: "Partner Event",
     description:
@@ -116,6 +156,8 @@ export const events: ArcEvent[] = [
     title: "GCN Oct 15 Investor Conference @ Newport Beach, CA - 100+ investors!",
     status: "upcoming",
     dates: "Oct 15, 2026",
+    startDate: "2026-10-15",
+    endDate: "2026-10-15",
     place: "Renaissance Newport Beach Marriott, 4500 MacArthur Blvd, Newport Beach, CA",
     tag: "Partner Event",
     description:
@@ -142,6 +184,8 @@ export const events: ArcEvent[] = [
     title: "Greenbuild International Conference and Expo",
     status: "upcoming",
     dates: "Oct 20, 2026",
+    startDate: "2026-10-20",
+    endDate: "2026-10-20",
     place: "Javits Center, New York, NY",
     tag: "Partner Event",
     description: "The largest annual event for green building professionals.",
@@ -154,6 +198,8 @@ export const events: ArcEvent[] = [
     title: "European Sustainability Congress",
     status: "upcoming",
     dates: "Oct 29, 2026",
+    startDate: "2026-10-29",
+    endDate: "2026-10-29",
     place: "Mała Warszawa, Otwocka 14, Warsaw, Poland",
     tag: "Partner Event",
     description: "One of the biggest international events about the circular economy.",
@@ -164,6 +210,8 @@ export const events: ArcEvent[] = [
     title: "COP31",
     status: "upcoming",
     dates: "Nov 9, 2026",
+    startDate: "2026-11-09",
+    endDate: "2026-11-09",
     place: "Antalya, Türkiye",
     tag: "Partner Event",
     description: "The UN climate conference, with accommodation secured at the Royal Seginus Hotel.",
@@ -176,6 +224,8 @@ export const events: ArcEvent[] = [
     title: "GreenBiz",
     status: "upcoming",
     dates: "Feb 23 – 25, 2027",
+    startDate: "2027-02-23",
+    endDate: "2027-02-25",
     place: "Gaylord Pacific, San Diego, CA",
     tag: "Partner Event",
     description: "A top sustainability-in-business conference uniting industry leaders.",
@@ -188,6 +238,8 @@ export const events: ArcEvent[] = [
     title: "Coastal Futures Convening",
     status: "past",
     dates: "Jul 11 – 12, 2026",
+    startDate: "2026-07-11",
+    endDate: "2026-07-12",
     place: "Santa Monica & Venice, CA",
     tag: "Workshop",
     description:
@@ -199,6 +251,8 @@ export const events: ArcEvent[] = [
     title: "A Global Call to Regenerate",
     status: "past",
     dates: "May 29 – 31, 2026",
+    startDate: "2026-05-29",
+    endDate: "2026-05-31",
     place: "Sane Living Center, Ojai, CA",
     tag: "Gathering",
     description:
